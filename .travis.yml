@@ -21,19 +21,21 @@ before_script:
   - cp config/database.travis.yml config/database.yml
   - psql -c 'create database travis_ci_test;' -U postgres
 
-script: bundle exec rake test
-
 notifications:
   email: true
   on_success: change
   on_failure: always
   notify: true
+
 jobs:
   include:
-    - script:  'bundle exec rake test'
-    - stage: deploy
-      script: skip
-      deploy: &heroku
-        provider: heroku
-        api_key:
-          secure: k1nlBVql5dDNYkcnVcnzcB1Ux5kMS0ckR8vuCenHYiLouxTRJR5+yruNP6GHc58/yEFbdm/evyL8z3PNEwh1hlD7is9/ZT4CY/VGPXf+S/48rsP65OAtb2cHpAf8I/t7nMM4TIevAB4Qmvd6xokcI8/HayV84HYL7tCuwW+SbBGM1r9/6i86c8TpAekd2l8mqNxXjF92UAFKju01j4bCrvQ9fHCz7kBSU3a15RbnHockEOHPONexsdfRJMfM9exXz8rqk4aL7/WPlxitDfV/ga7FScbMSQ/vWTiC48hQrhUopgeCtp5tWWb31jW5OOqWWw7/+6tB7mdBbwWk871tNkOTVA38zKoKPupba8pyVqNwFM9KjZ04/nDw3pb0JHKt8YTNnd9tuYGDcb/L4LvELH3yoFT+cUwjOnUXZwpjWWl3sul2xHeXSmros8yx255aTXwyelzXlNK3UOHaiEqq4tFnngq/q6H1YK/mloh3HH3BRs0eGaeDcTbnVk9LHTQGzXsYbNlriTdtJdU5pBJIKpvcdXjCTK8oOSq5djQo4DbgQsjt6Yt7MAwy/tTQVLtdrecRjalAU0eRguhafJIo9gcBFoJWTr/2rHcUhkIrZCk9oyu/C5PsCoyuEje/7U234t4lheMTrFhQQS0oxTxF4dmyFH3DGdZv6dJRGESs8nA=
+  - script: bundle exec rake test
+  - stage: deploy
+    script: skip
+    deploy:
+      provider: heroku
+      app: axolotl-calendar
+      on:
+        repo: phansch/axolotl
+      api_key:
+        secure: Z9vDlqZp2QAPHUFj6yKMLwWClSsVHTFEKy04bmGMI3dSsbKY+0+IQ2h/bVD17OqB4dS1nMxUClFbPwi2hxjG19OwffCznyydbip4ICQS6H6WHirwy9Dr1OfvB7slz+Kqt4Fo9oAX4AqafkGsra9WJRFT1+3tM52MkseX1r+zRRKEo5jYArSjZH1gg7xViVDazBUcgS9HZmbrXQ5sSvFQv9jloSdol9Jx5H3jllj/1KmYBHk2zZKz7eA22j1oLTz8FeeD6cjhbsW5YMsImJWkV/7GTzNJ6xwJlT9AhnmwtxZBfbvIL2YefoTpAgB6QYzVYSbQbSUtfFfpCJJO356ghruKN16UERZ+qkfz5vK1qm3pfNCFL6NxPVQ5U0aa9RL0Uq2ioz8EI8lhkgEuIIUTjwwRRydTKurFJZceyAnWfceKOwEpZQ8C0/o8AnxY4CAVKtfw4p514tlIgn1i9bWFnSUzsFJf/RBY+E+IMO8ub6AMHDc8v6had4Yunlx2A4E+BLH7mjAPIiggJJFyQS6h3PwZsodlH/zG0335TX23n702zxG29zJvgYHfYrQofTFPP6INu6CYINueHO3RT23hUod/MOdOwTywer07Udufp7EsZw44SFLoVKSIh/oVRJnjlHbB5n0PfXYa5oeRPO6kR+WlwzUV+MizM9phuc82Z9w=
