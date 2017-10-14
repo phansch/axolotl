@@ -21,10 +21,19 @@ before_script:
   - cp config/database.travis.yml config/database.yml
   - psql -c 'create database travis_ci_test;' -U postgres
 
-script: 'bundle exec rake test'
+script: bundle exec rake test
 
 notifications:
   email: true
   on_success: change
   on_failure: always
   notify: true
+jobs:
+  include:
+    - script:  'bundle exec rake test'
+    - stage: deploy
+      script: skip
+      deploy: &heroku
+        provider: heroku
+        api_key:
+          secure: k1nlBVql5dDNYkcnVcnzcB1Ux5kMS0ckR8vuCenHYiLouxTRJR5+yruNP6GHc58/yEFbdm/evyL8z3PNEwh1hlD7is9/ZT4CY/VGPXf+S/48rsP65OAtb2cHpAf8I/t7nMM4TIevAB4Qmvd6xokcI8/HayV84HYL7tCuwW+SbBGM1r9/6i86c8TpAekd2l8mqNxXjF92UAFKju01j4bCrvQ9fHCz7kBSU3a15RbnHockEOHPONexsdfRJMfM9exXz8rqk4aL7/WPlxitDfV/ga7FScbMSQ/vWTiC48hQrhUopgeCtp5tWWb31jW5OOqWWw7/+6tB7mdBbwWk871tNkOTVA38zKoKPupba8pyVqNwFM9KjZ04/nDw3pb0JHKt8YTNnd9tuYGDcb/L4LvELH3yoFT+cUwjOnUXZwpjWWl3sul2xHeXSmros8yx255aTXwyelzXlNK3UOHaiEqq4tFnngq/q6H1YK/mloh3HH3BRs0eGaeDcTbnVk9LHTQGzXsYbNlriTdtJdU5pBJIKpvcdXjCTK8oOSq5djQo4DbgQsjt6Yt7MAwy/tTQVLtdrecRjalAU0eRguhafJIo9gcBFoJWTr/2rHcUhkIrZCk9oyu/C5PsCoyuEje/7U234t4lheMTrFhQQS0oxTxF4dmyFH3DGdZv6dJRGESs8nA=
