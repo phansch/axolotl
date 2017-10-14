@@ -1,5 +1,7 @@
 # README
 
+[![Build Status](https://travis-ci.org/phansch/axolotl.svg?branch=master)](https://travis-ci.org/phansch/axolotl)
+
 ## Setup
 
 For development and testing you will need to setup your own postgres user:
