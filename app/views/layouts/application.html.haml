@@ -7,4 +7,15 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    = yield
+    .ui.fixed.inverted.menu
+      .ui.container
+        .header.item
+          Axolotl
+        = link_to 'Home', entries_path, class: 'item'
+        - if Rails.env.development?
+          .right.menu
+            = link_to 'Travis', 'https://travis-ci.org/phansch/axolotl', class: 'ui item'
+            = link_to 'Pull Requests', 'https://github.com/phansch/axolotl/pulls', class: 'ui item'
+
+    .ui.main.text.container
+      = yield
