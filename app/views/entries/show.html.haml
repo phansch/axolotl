@@ -1,0 +1,16 @@
+%p#notice= notice
+%p
+  %strong Title:
+  = @entry.title
+%p
+  %strong Start time:
+  = @entry.start_time
+%p
+  %strong End time:
+  = @entry.end_time
+%p
+  %strong Location:
+  = @entry.location
+= link_to 'Edit', edit_entry_path(@entry)
+|
+= link_to 'Back', entries_path

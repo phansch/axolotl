@@ -1,0 +1,23 @@
+= form_with(model: entry, local: true) do |form|
+  - if entry.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(entry.errors.count, "error")
+        prohibited this entry from being saved:
+      %ul
+        - entry.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :title
+    = form.text_field :title, id: :entry_title
+  .field
+    = form.label :start_time
+    = form.datetime_select :start_time, id: :entry_start_time
+  .field
+    = form.label :end_time
+    = form.datetime_select :end_time, id: :entry_end_time
+  .field
+    = form.label :location
+    = form.text_area :location, id: :entry_location
+  .actions
+    = form.submit
