@@ -29,13 +29,16 @@ notifications:
 
 jobs:
   include:
-  - script: bundle exec rake test
-  - stage: deploy
-    script: skip
-    deploy:
-      provider: heroku
-      app: axolotl-calendar
-      on:
-        repo: phansch/axolotl
-      api_key:
-        secure: Z9vDlqZp2QAPHUFj6yKMLwWClSsVHTFEKy04bmGMI3dSsbKY+0+IQ2h/bVD17OqB4dS1nMxUClFbPwi2hxjG19OwffCznyydbip4ICQS6H6WHirwy9Dr1OfvB7slz+Kqt4Fo9oAX4AqafkGsra9WJRFT1+3tM52MkseX1r+zRRKEo5jYArSjZH1gg7xViVDazBUcgS9HZmbrXQ5sSvFQv9jloSdol9Jx5H3jllj/1KmYBHk2zZKz7eA22j1oLTz8FeeD6cjhbsW5YMsImJWkV/7GTzNJ6xwJlT9AhnmwtxZBfbvIL2YefoTpAgB6QYzVYSbQbSUtfFfpCJJO356ghruKN16UERZ+qkfz5vK1qm3pfNCFL6NxPVQ5U0aa9RL0Uq2ioz8EI8lhkgEuIIUTjwwRRydTKurFJZceyAnWfceKOwEpZQ8C0/o8AnxY4CAVKtfw4p514tlIgn1i9bWFnSUzsFJf/RBY+E+IMO8ub6AMHDc8v6had4Yunlx2A4E+BLH7mjAPIiggJJFyQS6h3PwZsodlH/zG0335TX23n702zxG29zJvgYHfYrQofTFPP6INu6CYINueHO3RT23hUod/MOdOwTywer07Udufp7EsZw44SFLoVKSIh/oVRJnjlHbB5n0PfXYa5oeRPO6kR+WlwzUV+MizM9phuc82Z9w=
+    - stage: test
+      script: 'bin/ci.rb'
+      env:
+        - RUN=test
+    - stage: deploy
+      script: skip
+      deploy:
+        provider: heroku
+        app: axolotl-calendar
+        on:
+          repo: phansch/axolotl
+        api_key:
+          secure: Z9vDlqZp2QAPHUFj6yKMLwWClSsVHTFEKy04bmGMI3dSsbKY+0+IQ2h/bVD17OqB4dS1nMxUClFbPwi2hxjG19OwffCznyydbip4ICQS6H6WHirwy9Dr1OfvB7slz+Kqt4Fo9oAX4AqafkGsra9WJRFT1+3tM52MkseX1r+zRRKEo5jYArSjZH1gg7xViVDazBUcgS9HZmbrXQ5sSvFQv9jloSdol9Jx5H3jllj/1KmYBHk2zZKz7eA22j1oLTz8FeeD6cjhbsW5YMsImJWkV/7GTzNJ6xwJlT9AhnmwtxZBfbvIL2YefoTpAgB6QYzVYSbQbSUtfFfpCJJO356ghruKN16UERZ+qkfz5vK1qm3pfNCFL6NxPVQ5U0aa9RL0Uq2ioz8EI8lhkgEuIIUTjwwRRydTKurFJZceyAnWfceKOwEpZQ8C0/o8AnxY4CAVKtfw4p514tlIgn1i9bWFnSUzsFJf/RBY+E+IMO8ub6AMHDc8v6had4Yunlx2A4E+BLH7mjAPIiggJJFyQS6h3PwZsodlH/zG0335TX23n702zxG29zJvgYHfYrQofTFPP6INu6CYINueHO3RT23hUod/MOdOwTywer07Udufp7EsZw44SFLoVKSIh/oVRJnjlHbB5n0PfXYa5oeRPO6kR+WlwzUV+MizM9phuc82Z9w=
